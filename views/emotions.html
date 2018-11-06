@@ -1,0 +1,106 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Boost</title>
+
+    <!-- Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+
+</head>
+<body>
+    <div style="width: 75%; margin-left: auto; margin-right: auto;">
+        <canvas id="myChart"></canvas>
+        <br><br>
+        <canvas id="RadarChart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        // Instantiate a new chart using 'data' (defined below)
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{{emotions.timestamp}}],
+                datasets: [
+                  {
+                    label: "Anger",
+                    backgroundColor : "#ffcece",
+                    borderColor: "#ff9c9c",
+                    data: [{{emotions.anger}}]
+                  },
+                  {
+                    label: "Joy",
+                    backgroundColor : "#fff1ce",
+                    borderColor: "#deb44e",
+                    data: [{{emotions.joy}}]
+                  },
+                  {
+                    label: "Sadness",
+                    backgroundColor : "#e5bdff",
+                    borderColor: "#b373db",
+                    data: [{{emotions.sadness}}]
+                  },
+                  {
+                    label: "Disgust",
+                    backgroundColor : "#d1ffd7",
+                    borderColor: "#4d8c56",
+                    data: [{{emotions.disgust}}]
+                  },
+                  {
+                    label: "Contempt",
+                    backgroundColor : "#c7fff8",
+                    borderColor: "#46b1a3",
+                    data: [{{emotions.contempt}}]
+                  },
+                  {
+                    label: "Fear",
+                    backgroundColor : "#dcdcdc",
+                    borderColor: "#555555",
+                    data: [{{emotions.fear}}]
+                  },
+                  {
+                    label: "Surprise",
+                    backgroundColor : "#ffdcc4",
+                    borderColor: "#cb8e66",
+                    data: [{{emotions.surprise}}]
+                  }
+
+              ]
+            },
+            options: {}
+        });
+    </script>
+
+
+    <!-- <div style="width: 75%; margin-left: auto; margin-right: auto;">
+        <canvas id="RadarChart"></canvas>
+    </div> -->
+
+    <script>
+    var marksData = {
+      labels: ["Joy", "Sadness", "Disgust", "Contempt", "Anger", "Fear", "Surprise"],
+      datasets: [{
+        label: "Average Emotion",
+        backgroundColor: "rgba(88,156,212,0.5)",
+        borderColor : "#4b97d2",
+        data: [{{emotions.avg_joy}},{{emotions.avg_sadness}},{{emotions.avg_disgust}},{{emotions.avg_contempt}},{{emotions.avg_anger}},{{emotions.avg_fear}},{{emotions.avg_surprise}}]
+      }]
+    };
+
+      var marksCanvas = document.getElementById("RadarChart");
+
+
+      var radarChart = new Chart(marksCanvas, {
+      type: 'radar',
+      data: marksData
+      });
+    </script>
+</body>
+</html>
