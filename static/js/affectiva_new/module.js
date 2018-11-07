@@ -23,6 +23,18 @@
           timestamp : ""
       };
 
+      var list_musics = [];
+
+      const testFolder = '../../../data_train/';
+      const fs = require('fs');
+
+      fs.readdir(testFolder, (err, files) => {
+        files.forEach(file => {
+          console.log(file);
+          list_musics.push(files);
+        });
+      })
+
       //Enable detection of all Expressions, Emotions and Emojis classifiers.
       detector.detectAllEmotions();
       detector.detectAllEmojis();
@@ -105,6 +117,9 @@
               contentType: 'application/json',
               success : function(res, err) {
                   console.log('Success Recommend');
+                  let matches = list_musics.filter(s => s.includes(res[0][0]))
+                  console.log(matches)
+                  log('#recommend', res);
                   console.log(res);
                   if(err){
                     console.log(err);
