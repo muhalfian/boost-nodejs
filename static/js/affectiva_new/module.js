@@ -71,7 +71,7 @@
 
       function onSubmit() {
           $.ajax({
-              url     : '/emotion/save',
+              url     : 'http://178.128.92.33/boost/emotion/save',
               type    : 'POST',
               data    : {
                   music_id    : 1,
@@ -98,11 +98,11 @@
 
       function recommendMusic(data_emotion) {
           $.ajax({
-              url     : 'http://localhost:5000/api/v1/resources/recommend/',
+              url     : 'http://178.128.92.33/api/v1/resources/recommend/',
               type    : 'POST',
-              data    : {
-                  data : data_emotion
-              },
+              data    : JSON.stringify({ data : data_emotion }),
+              dataType : 'json',
+              contentType: 'application/json',
               success : function(res, err) {
                   console.log('Success Recommend');
                   console.log(res);
@@ -152,18 +152,19 @@
           // console.log(emotion_collect);
           onSubmit();
           $('#logs').html("");
+
+	  iter_submit++;
+          emotion_temp[0] += emotion_collect.joy;
+          emotion_temp[0] += emotion_collect.sadness;
+          emotion_temp[0] += emotion_collect.disgust;
+          emotion_temp[0] += emotion_collect.contempt;
+          emotion_temp[0] += emotion_collect.anger;
+          emotion_temp[0] += emotion_collect.fear;
+          emotion_temp[0] += emotion_collect.surprise;
+
         }
         log('#results', face_emoji);
-
-        iter_submit++;
-        emotion_temp[0] += emotion_collect.joy;
-        emotion_temp[1] += emotion_collect.sadness;
-        emotion_temp[2] += emotion_collect.disgust;
-        emotion_temp[3] += emotion_collect.contempt;
-        emotion_temp[4] += emotion_collect.anger;
-        emotion_temp[5] += emotion_collect.fear;
-        emotion_temp[6] += emotion_collect.surprise;
-        n_iter = 60
+	n_iter = 20
 
         if(iter_submit>n_iter){
           emotion_temp[0] /= n_iter;
@@ -173,7 +174,16 @@
           emotion_temp[4] /= n_iter;
           emotion_temp[5] /= n_iter;
           emotion_temp[6] /= n_iter;
+          console.log(emotion_temp);
           recommendMusic(emotion_temp);
+	  iter_submit = 0;
+	  emotion_temp[0] = 0;
+	  emotion_temp[1] = 0;
+	  emotion_temp[2] = 0;
+	  emotion_temp[3] = 0;
+	  emotion_temp[4] = 0;
+	  emotion_temp[5] = 0;
+	  emotion_temp[6] = 0;
         }
       });
 
