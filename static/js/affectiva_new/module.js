@@ -23,17 +23,17 @@
           timestamp : ""
       };
 
-      var list_musics = [];
-
-      const testFolder = '../../../data_train/';
-      const fs = require('fs');
-
-      fs.readdir(testFolder, (err, files) => {
-        files.forEach(file => {
-          console.log(file);
-          list_musics.push(files);
-        });
-      })
+      // var list_musics = [];
+      //
+      // const testFolder = '../../../data_train/';
+      // const fs = require('fs');
+      //
+      // fs.readdir(testFolder, (err, files) => {
+      //   files.forEach(file => {
+      //     console.log(file);
+      //     list_musics.push(files);
+      //   });
+      // })
 
       //Enable detection of all Expressions, Emotions and Emojis classifiers.
       detector.detectAllEmotions();
