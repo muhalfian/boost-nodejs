@@ -287,13 +287,13 @@ body {
 }
 
 #face_video_canvas{
-    width : 64px;
-    height : 48px;
+    width : 192px;
+    height : 144px;
 }
 
 #face_video{
-    width : 64px !important;
-    height : 48px !important;
+    width : 192px !important;
+    height : 144px !important;
 }
 
 .navbar-fixed-top{
